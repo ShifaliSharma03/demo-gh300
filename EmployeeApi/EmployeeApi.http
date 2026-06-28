@@ -1,6 +1,22 @@
-@EmployeeApi_HostAddress = http://localhost:5157
+@EmployeeApi_HostAddress = http://localhost:5000
 
-GET {{EmployeeApi_HostAddress}}/weatherforecast/
+GET {{EmployeeApi_HostAddress}}/api/employees
 Accept: application/json
+
+###
+
+POST {{EmployeeApi_HostAddress}}/api/employees
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice@example.com",
+  "department": "Engineering",
+  "jobTitle": "Software Engineer",
+  "salary": 90000,
+  "hireDate": "2024-01-15T00:00:00Z",
+  "isActive": true
+}
 
 ###

@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-COPY EmployeeApi.sln ./
+COPY EmployeeApi.slnx ./
 COPY EmployeeApi/EmployeeApi.csproj        EmployeeApi/
 COPY EmployeeApi.Tests/EmployeeApi.Tests.csproj EmployeeApi.Tests/
 

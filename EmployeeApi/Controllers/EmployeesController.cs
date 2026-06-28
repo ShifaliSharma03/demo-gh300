@@ -55,12 +55,12 @@ public class EmployeesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     public async Task<ActionResult<Employee>> Create([FromBody] CreateEmployeeDto dto)
     {
-        _logger.LogInformation("Creating employee with email {Email}", dto.Email);
+        _logger.LogInformation("Creating a new employee");
 
         if (await _context.Employees.AnyAsync(e => e.Email == dto.Email))
         {
-            _logger.LogWarning("Employee with email {Email} already exists", dto.Email);
-            return Conflict(new { message = $"An employee with email '{dto.Email}' already exists." });
+            _logger.LogWarning("Attempted to create employee with a duplicate email");
+            return Conflict(new { message = "An employee with this email already exists." });
         }
 
         var employee = new Employee
@@ -101,8 +101,8 @@ public class EmployeesController : ControllerBase
 
         if (await _context.Employees.AnyAsync(e => e.Email == dto.Email && e.Id != id))
         {
-            _logger.LogWarning("Email {Email} is already in use by another employee", dto.Email);
-            return Conflict(new { message = $"Email '{dto.Email}' is already in use by another employee." });
+            _logger.LogWarning("Attempted to update employee {EmployeeId} with a duplicate email", id);
+            return Conflict(new { message = "This email address is already in use by another employee." });
         }
 
         employee.FirstName  = dto.FirstName;
